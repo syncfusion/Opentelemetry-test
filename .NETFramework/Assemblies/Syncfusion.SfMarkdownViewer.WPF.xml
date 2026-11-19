@@ -1,0 +1,634 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Syncfusion.SfMarkdownViewer.WPF</name>
+    </assembly>
+    <members>
+        <member name="T:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings">
+            <summary>
+            Provides configurable style settings that control the visual appearance of rendered Markdown elements.
+            These settings are consumed by the `SfMarkdownViewer` control to style headings, paragraphs, lists, tables, hyperlinks, code blocks, blockquotes and thematic breaks.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.H1StyleProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.H1Style"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.H2StyleProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.H2Style"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.H3StyleProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.H3Style"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.H4StyleProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.H4Style"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.H5StyleProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.H5Style"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.H6StyleProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.H6Style"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.ParagraphStyleProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.ParagraphStyle"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.TableStyleProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.TableStyle"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.LinkStyleProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.LinkStyle"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.ListStyleProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.ListStyle"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.InlineQuoteStyleProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.InlineQuoteStyle"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.CodeBlockStyleProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.CodeBlockStyle"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.ThematicStyleProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.ThematicStyle"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.BlockQuoteStyleProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.BlockQuoteStyle"/> dependency property.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.H1Style">
+            <summary>
+            Gets or sets the <see cref="T:Syncfusion.UI.Xaml.Markdown.HeaderSettings"/> that control the appearance of H1 headings. Default FontSize is 28.0.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.H2Style">
+            <summary>
+            Gets or sets the <see cref="T:Syncfusion.UI.Xaml.Markdown.HeaderSettings"/> that control the appearance of H2 headings. Default FontSize is 24.0.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.H3Style">
+            <summary>
+            Gets or sets the <see cref="T:Syncfusion.UI.Xaml.Markdown.HeaderSettings"/> that control the appearance of H3 headings. Default FontSize is 22.0.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.H4Style">
+            <summary>
+            Gets or sets the <see cref="T:Syncfusion.UI.Xaml.Markdown.HeaderSettings"/> that control the appearance of H4 headings. Default FontSize is 20.0.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.H5Style">
+            <summary>
+            Gets or sets the <see cref="T:Syncfusion.UI.Xaml.Markdown.HeaderSettings"/> that control the appearance of H5 headings. Default FontSize is 18.0.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.H6Style">
+            <summary>
+            Gets or sets the <see cref="T:Syncfusion.UI.Xaml.Markdown.HeaderSettings"/> that control the appearance of H6 headings. Default FontSize is 16.0.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.ParagraphStyle">
+            <summary>
+            Gets or sets the <see cref="T:Syncfusion.UI.Xaml.Markdown.ParagraphSettings"/> used for paragraph and body text styling.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.TableStyle">
+            <summary>
+            Gets or sets the <see cref="T:Syncfusion.UI.Xaml.Markdown.TableSettings"/> that control table rendering.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.LinkStyle">
+            <summary>
+            Gets or sets the <see cref="T:Syncfusion.UI.Xaml.Markdown.LinkSettings"/> used to style hyperlinks.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.ListStyle">
+            <summary>
+            Gets or sets the <see cref="T:Syncfusion.UI.Xaml.Markdown.ListSettings"/> applied to ordered and unordered lists.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.InlineQuoteStyle">
+            <summary>
+            Gets or sets the <see cref="T:Syncfusion.UI.Xaml.Markdown.InlineQuoteSettings"/> used to style inline quoted text.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.CodeBlockStyle">
+            <summary>
+            Gets or sets the <see cref="T:Syncfusion.UI.Xaml.Markdown.CodeBlockSettings"/> used to style fenced and indented code blocks.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.ThematicStyle">
+            <summary>
+            Gets or sets the <see cref="T:Syncfusion.UI.Xaml.Markdown.ThematicSettings"/> used for thematic breaks styling.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.BlockQuoteStyle">
+            <summary>
+            Gets or sets the <see cref="T:Syncfusion.UI.Xaml.Markdown.BlockQuoteSettings"/> applied to blockquote regions.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.#ctor">
+            <summary> 
+            Initializes a new instance of the <see cref="T:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings"/> class. 
+            </summary>
+        </member>
+        <member name="M:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings.CoerceHeaderStyle(System.Object,System.Double)">
+            <summary> 
+            Ensures that a <see cref="T:Syncfusion.UI.Xaml.Markdown.HeaderSettings"/> instance has the correct semantic default font size for a given heading level. 
+            </summary>
+        </member>
+        <member name="T:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer">
+            <summary>
+            Represents a control that renders Markdown content into a rich, formatted document.
+            The control supports Markdown elements such as headings, paragraphs, code blocks, tables,
+            ordered and unordered lists, blockquotes, inline formatting, images, and hyperlinks.
+            The appearance of the rendered content can be customized using <see cref="T:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings"/>.
+            The Markdown source can be provided as raw text, a file path, or an HTTP/HTTPS URL.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.richTextBox">
+            <summary>
+            The richtextbox that displays the rendered content.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.currentListItem">
+            <summary>
+            The currently active <see cref="T:System.Windows.Documents.ListItem"/> being populated in the current nested list structure.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.listStack">
+            <summary>
+            A stack that tracks the active nested <see cref="T:System.Windows.Documents.List"/> elements while rendering the list markdown content.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.isPreviousParagraphQuoted">
+            <summary>
+            Indicates whether the previously rendered paragraph was part of a blockquote.        
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.blockQuoteStack">
+            <summary>
+            A stack of <see cref="T:System.Windows.Documents.Section"/> objects representing nested blockquote levels.        
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.SourceProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.Source"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.SettingsProperty">
+            <summary>  
+             Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.Settings"/> dependency property. 
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.MermaidBlockTemplateProperty">
+            <summary>  
+             Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.MermaidBlockTemplate"/> dependency property. 
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.Source">
+            <summary>
+            Gets or sets the markdown source to render. The source can be a file path, an HTTP/HTTPS URL, or raw markdown text.
+            If a valid file path is provided, the file contents are loaded. If a valid HTTP/HTTPS URL is provided, the content 
+            is downloaded from the URL. Otherwise, the source is treated as raw markdown text.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.Settings">
+            <summary> 
+            Gets or sets the <see cref="T:Syncfusion.UI.Xaml.Markdown.MarkdownStyleSettings"/> that define the visual appearance of markdown elements 
+            such as headings, paragraphs, tables, lists, and hyperlinks rendered by the <see cref="T:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer"/> control.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.MermaidBlockTemplate">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.DataTemplate"/> used to render mermaid diagrams and flowcharts within the MarkdownViewer control.
+            When a mermaid code block is encountered in the markdown and this template is set, the template is used for rendering instead 
+            of the default code block rendering.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.ThemeKeyValues">
+            <summary>
+            Gets or sets the ThemeKeyValues for the MarkdownViewer content element.
+            </summary>
+        </member>
+        <member name="E:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.HyperlinkClicked">
+            <summary>
+            Occurs when a hyperlink is clicked within the rendered markdown content.
+            Handle this event to perform custom actions such as opening URLs or 
+            navigating within the application. 
+            Set <see cref="P:Syncfusion.UI.Xaml.Markdown.MarkdownHyperlinkClickedEventArgs.Cancel"/> to <c>true</c> 
+            to prevent the default action (opening the URL).
+            </summary>
+        </member>
+        <member name="M:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.OnMarkdownSourceChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Called when the <see cref="P:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.Source"/> property changes.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer"/> class.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.OnApplyTemplate">
+            <summary>
+            Builds the visual tree for the <see cref="T:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer"/> class.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.GetMarkdownText(System.String)">
+            <summary>
+            Loads raw markdown text from the specified source and makes it 
+            available for parsing and rendering within the control.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.UpdateDisplay">
+            <summary>
+            Renders the markdown content into the appropriate document.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.RenderCodeBlock(Syncfusion.Office.Markdown.MdCodeBlock,System.Windows.Documents.FlowDocument)">
+            <summary> 
+            Renders a markdown code block <see cref="T:Syncfusion.Office.Markdown.MdCodeBlock"/> into a <see cref="T:System.Windows.Documents.FlowDocument"/>. 
+            </summary>
+        </member>
+        <member name="M:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.RenderThematicBreak(Syncfusion.Office.Markdown.MdThematicBreak,System.Windows.Documents.FlowDocument)">
+            <summary> 
+            Renders a markdown horizontal ruler <see cref="T:Syncfusion.Office.Markdown.MdThematicBreak"/> into <see cref="T:System.Windows.Documents.FlowDocument"/>. 
+            </summary>
+        </member>
+        <member name="M:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.RenderParagraph(Syncfusion.Office.Markdown.MdParagraph,System.Windows.Documents.FlowDocument)">
+            <summary>
+             Converts a parsed <see cref="T:Syncfusion.Office.Markdown.MdParagraph"/> into a <see cref="T:System.Windows.Documents.Paragraph"/>
+            and appends it to the specified <see cref="T:System.Windows.Documents.FlowDocument"/>.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.RenderInline(Syncfusion.Office.Markdown.IMdInline,System.Windows.Documents.Paragraph)">
+            <summary>
+            Converts a parsed <see cref="T:System.Windows.Documents.Inline"/> element into a <see cref="T:System.Windows.Documents.Paragraph"/>
+            and appends it to the specified <see cref="T:System.Windows.Documents.FlowDocument"/>.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer.RenderTable(Syncfusion.Office.Markdown.MdTable,System.Windows.Documents.FlowDocument)">
+            <summary> 
+            Renders a <see cref="T:Syncfusion.Office.Markdown.MdTable"/> into <see cref="T:System.Windows.Documents.FlowDocument"/>. 
+            </summary>
+        </member>
+        <member name="T:Syncfusion.UI.Xaml.Markdown.ThemeKeys">
+            <summary>
+            Represents a centralized collection of theme-related visual properties
+            used for update the markdown text elements such as paragraphs, tables, links, 
+            code blocks, and quote.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.ThemeKeys.ParagraphForeground">
+            <summary>
+            Foreground property for the paragraph, headers, list, link, inlinequote, blockquote, table data content.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.ThemeKeys.TableHeaderForeground">
+            <summary>
+            Foreground property for the table header content.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.ThemeKeys.TableBackground">
+            <summary>
+            Gets or sets the background value for the table.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.ThemeKeys.BlockQuoteBorderBrush">
+            <summary>
+            Gets or sets the borderbrush value for the blockquote.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.ThemeKeys.TableBorderBrush">
+            <summary>
+            Gets or sets the borderbrush value for the table.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.ThemeKeys.ThematicBreakBorderBrush">
+            <summary>
+            Gets or sets the borderbrush value for the thematicbreak.
+            </summary>
+        </member>
+        <member name="E:Syncfusion.UI.Xaml.Markdown.ThemeKeys.PropertyChanged">
+            <summary>
+            Event triggered when a property value changes.
+            Used to notify the UI for data binding updates (INotifyPropertyChanged).
+            </summary>
+        </member>
+        <member name="M:Syncfusion.UI.Xaml.Markdown.ThemeKeys.OnPropertyChanged(System.String)">
+            <summary>
+            Raises the PropertyChanged event for the specified property.
+            </summary>
+            <param name="propertyName">
+            Name of the property that changed.
+            </param>
+        </member>
+        <member name="T:Syncfusion.UI.Xaml.Markdown.BlockQuoteSettings">
+            <summary>
+            Provides configurable style setting for thematic break.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.BlockQuoteSettings.BorderThicknessProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.BlockQuoteSettings.BorderThickness"/> dependency property.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.BlockQuoteSettings.BorderThickness">
+            <summary>
+            Gets or sets the border thickness for thematic breaks.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.BlockQuoteSettings.BorderBrush">
+            <summary>
+            Gets or sets the border brush for thematic breaks.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.UI.Xaml.Markdown.CodeBlockSettings">
+            <summary>
+            Provides configurable style settings for codeblocks.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.UI.Xaml.Markdown.FontSettings">
+            <summary>
+            Provides configurable style settings for texts.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.FontSettings.FontSizeProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.FontSettings.FontSize"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.FontSettings.FontWeightProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.FontSettings.FontWeight"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.FontSettings.FontStyleProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.FontSettings.FontStyle"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.FontSettings.FontDecorationProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.FontSettings.FontDecoration"/> dependency property.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.FontSettings.FontSize">
+            <summary>
+            Gets or sets the font size for texts.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.FontSettings.FontWeight">
+            <summary>
+            Gets or sets the font weight for texts.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.FontSettings.FontStyle">
+            <summary>
+            Gets or sets the font style for texts.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.FontSettings.FontDecoration">
+            <summary>
+            Gets or sets the text decoration for texts.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.FontSettings.Foreground">
+            <summary>
+            Gets or sets the foreground for texts.
+            </summary>
+        </member>
+        <member name="E:Syncfusion.UI.Xaml.Markdown.FontSettings.PropertyChanged">
+            <summary>
+            Event triggered when a property value changes.
+            Used to notify the UI for data binding updates (INotifyPropertyChanged).
+            </summary>
+        </member>
+        <member name="M:Syncfusion.UI.Xaml.Markdown.FontSettings.OnPropertyChanged(System.String)">
+            <summary>
+            Raises the PropertyChanged event for the specified property.
+            </summary>
+            <param name="propertyName">
+            Name of the property that changed.
+            </param>
+        </member>
+        <member name="T:Syncfusion.UI.Xaml.Markdown.HeaderSettings">
+            <summary>
+            Provides configurable style settings for headings.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.UI.Xaml.Markdown.HeaderSettings.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Syncfusion.UI.Xaml.Markdown.HeaderSettings"/> class.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.UI.Xaml.Markdown.InlineQuoteSettings">
+            <summary>
+            Provides configurable style settings for inlinequotes.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.InlineQuoteSettings.Background">
+            <summary>
+            Gets or sets the background for inlinequotes.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.UI.Xaml.Markdown.LinkSettings">
+            <summary>
+            Provides configurable style settings for links.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.UI.Xaml.Markdown.LinkSettings.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Syncfusion.UI.Xaml.Markdown.LinkSettings"/> class.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.UI.Xaml.Markdown.ListSettings">
+            <summary>
+            Provides configurable style settings for lists.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.UI.Xaml.Markdown.MarkdownHyperlinkClickedEventArgs">
+            <summary> 
+            Provides data for the event that occurs when a hyperlink is clicked in <see cref="T:Syncfusion.UI.Xaml.Markdown.SfMarkdownViewer"/> control. 
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.MarkdownHyperlinkClickedEventArgs.Url">
+            <summary>
+            Gets the value of the URL.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.MarkdownHyperlinkClickedEventArgs.Cancel">
+            <summary> 
+            Gets or sets a value indicating whether the hyperlink click should be canceled. 
+            </summary>
+        </member>
+        <member name="M:Syncfusion.UI.Xaml.Markdown.MarkdownHyperlinkClickedEventArgs.#ctor(System.String)">
+            <summary> 
+            Initializes a new instance of the <see cref="T:Syncfusion.UI.Xaml.Markdown.MarkdownHyperlinkClickedEventArgs"/> class. 
+            </summary>
+        </member>
+        <member name="T:Syncfusion.UI.Xaml.Markdown.ParagraphSettings">
+            <summary>
+            Provides configurable style settings for paragraphs.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.UI.Xaml.Markdown.TableSettings">
+            <summary>
+            Provides configurable style settings for tables.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.TableSettings.HeaderStyleProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.TableSettings.HeaderStyle"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.TableSettings.ContentStyleProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.TableSettings.ContentStyle"/> dependency property.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.TableSettings.HeaderStyle">
+            <summary>
+            Gets or sets the font proprties for table header.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.TableSettings.ContentStyle">
+            <summary>
+            Gets or sets the font proprties for table content.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.TableSettings.BorderBrush">
+            <summary>
+            Gets or sets the border brush for table.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.TableSettings.Background">
+            <summary>
+            Gets or sets the background for table.
+            </summary>
+        </member>
+        <member name="E:Syncfusion.UI.Xaml.Markdown.TableSettings.PropertyChanged">
+            <summary>
+            Event triggered when a property value changes.
+            Used to notify the UI for data binding updates (INotifyPropertyChanged).
+            </summary>
+        </member>
+        <member name="M:Syncfusion.UI.Xaml.Markdown.TableSettings.OnPropertyChanged(System.String)">
+            <summary>
+            Raises the PropertyChanged event for the specified property.
+            </summary>
+            <param name="propertyName">
+            Name of the property that changed.
+            </param>
+        </member>
+        <member name="M:Syncfusion.UI.Xaml.Markdown.TableSettings.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Syncfusion.UI.Xaml.Markdown.TableSettings"/> class.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.UI.Xaml.Markdown.ThematicSettings">
+            <summary>
+            Provides configurable style setting for thematic break.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.UI.Xaml.Markdown.ThematicSettings.BorderThicknessProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.UI.Xaml.Markdown.ThematicSettings.BorderThickness"/> dependency property.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.ThematicSettings.BorderThickness">
+            <summary>
+            Gets or sets the border thickness for thematic breaks.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Markdown.ThematicSettings.BorderBrush">
+            <summary>
+            Gets or sets the border brush for thematic breaks.
+            </summary>
+        </member>
+        <member name="E:Syncfusion.UI.Xaml.Markdown.ThematicSettings.PropertyChanged">
+            <summary>
+            Event triggered when a property value changes.
+            Used to notify the UI for data binding updates (INotifyPropertyChanged).
+            </summary>
+        </member>
+        <member name="M:Syncfusion.UI.Xaml.Markdown.ThematicSettings.OnPropertyChanged(System.String)">
+            <summary>
+            Raises the PropertyChanged event for the specified property.
+            </summary>
+            <param name="propertyName">
+            Name of the property that changed.
+            </param>
+        </member>
+        <member name="T:Syncfusion.Windows.Edit.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Windows.Edit.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Windows.Edit.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
+        </member>
+    </members>
+</doc>

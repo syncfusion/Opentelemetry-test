@@ -1,0 +1,2044 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Syncfusion.Telemetry</name>
+    </assembly>
+    <members>
+        <member name="T:Syncfusion.Telemetry.AzureConnectionStringParser">
+            <summary>
+            Parses Azure Application Insights connection strings to extract
+            the instrumentation key and ingestion endpoint.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AzureConnectionStringParser.InstrumentationKey">
+            <summary>
+            Gets the instrumentation key extracted from the connection string.
+            The key is stored without hyphens.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AzureConnectionStringParser.IngestionEndpoint">
+            <summary>
+            Gets the ingestion endpoint URL for Azure Application Insights.
+            Defaults to https://dc.services.visualstudio.com if not specified
+            in the connection string but an instrumentation key is present.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AzureConnectionStringParser.Parse(System.String)">
+            <summary>
+            Parses the specified Azure Application Insights connection string.
+            </summary>
+            <param name="connectionString">The connection string to parse.</param>
+            <returns><c>true</c> if the connection string contains a valid instrumentation key; otherwise, <c>false</c>.</returns>
+            <remarks>
+            Expected connection string format: "InstrumentationKey=key;IngestionEndpoint=https://endpoint.com"
+            </remarks>
+        </member>
+        <member name="T:Syncfusion.Telemetry.SdkName">
+            <summary>
+            Enumeration of valid Syncfusion SDK names.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.SdkName.GridSDK">
+            <summary>Grid SDK for data visualization and manipulation.</summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.SdkName.ChartSDK">
+            <summary>Chart SDK for creating various chart types.</summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.SdkName.DiagramSDK">
+            <summary>Diagram SDK for creating and visualizing diagrams.</summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.SdkName.RichTextEditorSDK">
+            <summary>Rich Text Editor SDK for text editing capabilities.</summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.SdkName.FileManagerSDK">
+            <summary>File Manager SDK for file management operations.</summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.SdkName.GanttSDK">
+            <summary>Gantt SDK for project management and scheduling.</summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.SdkName.SchedulerSDK">
+            <summary>Scheduler SDK for appointment and event scheduling.</summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.SdkName.SpreadsheetEditorSDK">
+            <summary>Spreadsheet Editor SDK for spreadsheet operations.</summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.SdkName.DOCXEditorSDK">
+            <summary>DOCX Editor SDK for document editing.</summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.SdkName.PDFViewerSDK">
+            <summary>PDF Viewer SDK for viewing PDF documents.</summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.SdkName.DocumentSDK">
+            <summary>Document SDK for document-related operations.</summary>
+        </member>
+        <member name="T:Syncfusion.Telemetry.HttpTelemetrySender">
+            <summary>
+            HTTP-based telemetry sender that sends telemetry events to Azure Application Insights.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.HttpTelemetrySender._options">
+            <summary>
+            The telemetry configuration options.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.HttpTelemetrySender._httpClient">
+            <summary>
+            The HTTP client used for sending telemetry data.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.HttpTelemetrySender._requestUri">
+            <summary>
+            The URI endpoint for telemetry ingestion (Syncfusion).
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.HttpTelemetrySender._instrumentationKey">
+            <summary>
+            The instrumentation key for Azure Application Insights (Syncfusion).
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.HttpTelemetrySender._customerRequestUri">
+            <summary>
+            The URI endpoint for customer telemetry ingestion (if customer insights enabled).
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.HttpTelemetrySender._customerInstrumentationKey">
+            <summary>
+            The instrumentation key for customer Azure Application Insights.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.HttpTelemetrySender._awsConfig">
+            <summary>
+            AWS CloudWatch Logs configuration (if customer has AWS configured).
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.HttpTelemetrySender.#ctor(Syncfusion.Telemetry.TelemetryOptions,System.Net.Http.HttpClient)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Syncfusion.Telemetry.HttpTelemetrySender"/> class.
+            </summary>
+            <param name="options">The telemetry options containing connection and configuration details.</param>
+            <param name="httpClient">The HTTP client to use for sending requests. If null, a default client will be created.</param>
+        </member>
+        <member name="M:Syncfusion.Telemetry.HttpTelemetrySender.#ctor(Syncfusion.Telemetry.TelemetryOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Syncfusion.Telemetry.HttpTelemetrySender"/> class with default HTTP client.
+            </summary>
+            <param name="options">The telemetry options containing connection and configuration details.</param>
+            <remarks>
+            This overload creates a default HTTP client for sending telemetry.
+            </remarks>
+        </member>
+        <member name="M:Syncfusion.Telemetry.HttpTelemetrySender.SendAsync(Syncfusion.Telemetry.TelemetryBatch,System.Threading.CancellationToken)">
+            <summary>
+            Sends a batch of telemetry events to Application Insights asynchronously.
+            
+            Flow:
+            1. Send to Syncfusion endpoint (primary, synchronous)
+            2. Check if CustomerInsightsManager is configured (static variable)
+            3. If configured and valid: Send same telemetry to customer endpoint (async, fire-and-forget)
+            </summary>
+            <param name="batch">The telemetry batch containing events to send.</param>
+            <param name="cancellationToken">A cancellation token to cancel the operation.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+            <remarks>
+            All exceptions are silently caught to ensure telemetry failures never impact the application.
+            Uses a fast timeout to quickly detect network unavailability without blocking.
+            Cross-platform compatible with Blazor, MAUI, WinUI, .NET Core, etc.
+            
+            AUTOMATIC DUAL-LOGGING:
+            If CustomerInsightsManager.IsConfigured is true, telemetry is automatically
+            sent to both Syncfusion and customer endpoints without any additional code.
+            </remarks>
+        </member>
+        <member name="M:Syncfusion.Telemetry.HttpTelemetrySender.SendToEndpointAsync(System.Uri,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Sends telemetry to a specific endpoint.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.HttpTelemetrySender.CreateContent(System.String)">
+            <summary>
+            Creates the HTTP content for the request, optionally applying GZIP compression.
+            </summary>
+            <param name="json">The JSON payload to send.</param>
+            <returns>The HTTP content with appropriate headers.</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.HttpTelemetrySender.BuildFallbackUri(System.String)">
+            <summary>
+            Builds the fallback ingestion URI using the default endpoint.
+            </summary>
+            <param name="endpoint">The endpoint URL. If null or empty, uses the default Application Insights endpoint.</param>
+            <returns>The absolute URI for the track endpoint.</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.HttpTelemetrySender.BuildIngestionUri(System.String)">
+            <summary>
+            Builds the ingestion URI from the Azure connection string endpoint.
+            </summary>
+            <param name="ingestionEndpoint">The ingestion endpoint from the connection string.</param>
+            <returns>The absolute URI for the track endpoint.</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.HttpTelemetrySender.CreateApplicationInsightsPayload(Syncfusion.Telemetry.TelemetryBatch,System.String)">
+            <summary>
+            Creates the Application Insights payload from a telemetry batch.
+            </summary>
+            <param name="batch">The telemetry batch containing events.</param>
+            <param name="instrumentationKey">The instrumentation key to use for the payload. If null, uses Syncfusion's default key.</param>
+            <returns>A list of Application Insights envelopes ready for serialization.</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.HttpTelemetrySender.CreateApplicationInsightsEvent(Syncfusion.Telemetry.TelemetryEvent,Syncfusion.Telemetry.TelemetryBatch,System.String)">
+            <summary>
+            Creates a single Application Insights envelope from a telemetry event.
+            </summary>
+            <param name="telemetryEvent">The telemetry event to convert.</param>
+            <param name="batch">The parent batch containing context information.</param>
+            <param name="instrumentationKey">The instrumentation key to use for this envelope.</param>
+            <returns>An Application Insights envelope with event data.</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.HttpTelemetrySender.CreateAwsCloudWatchPayload(Syncfusion.Telemetry.TelemetryBatch)">
+            <summary>
+            Creates the AWS CloudWatch Logs payload from a telemetry batch.
+            
+            Format: CloudWatch Logs expects JSON with logEvents array containing:
+            - timestamp: Unix milliseconds
+            - message: The log message (JSON string with event details)
+            </summary>
+            <param name="batch">The telemetry batch containing events.</param>
+            <returns>An AWS CloudWatch Logs request payload.</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.HttpTelemetrySender.EnsureAwsLogStreamExistsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Creates the AWS CloudWatch Logs log stream if it doesn't already exist.
+            CRITICAL: This must be called before PutLogEvents API.
+            
+            AWS CloudWatch requires the log stream to exist before you can write log events to it.
+            This method calls the CreateLogStream API, which:
+            - Returns HTTP 200 on success (first time)
+            - Returns HTTP 409 on subsequent calls (stream already exists - ignored)
+            - Returns HTTP 404 if log group doesn't exist (rare - customer should create manually)
+            </summary>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>A task representing the asynchronous operation</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.HttpTelemetrySender.SendToAwsCloudWatchAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Sends telemetry to AWS CloudWatch Logs asynchronously.
+            
+            Uses AWS Signature Version 4 (SigV4) authentication and the PutLogEvents API.
+            NOTE: The log stream should be created first by calling EnsureAwsLogStreamExistsAsync
+            </summary>
+            <param name="payload">The JSON payload (CloudWatch log events format)</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>A task representing the asynchronous operation</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.HttpTelemetrySender.AddProperty(System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.String)">
+            <summary>
+            Adds a property to the dictionary if the value is not null or whitespace.
+            </summary>
+            <param name="properties">The dictionary to add the property to.</param>
+            <param name="key">The property key.</param>
+            <param name="value">The property value.</param>
+        </member>
+        <member name="T:Syncfusion.Telemetry.HttpTelemetrySender.ApplicationInsightsEnvelope">
+            <summary>
+            Represents the envelope structure for Application Insights telemetry.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.HttpTelemetrySender.ApplicationInsightsEnvelope.Name">
+            <summary>
+            Gets or sets the name of the envelope.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.HttpTelemetrySender.ApplicationInsightsEnvelope.Time">
+            <summary>
+            Gets or sets the timestamp of the telemetry event.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.HttpTelemetrySender.ApplicationInsightsEnvelope.InstrumentationKey">
+            <summary>
+            Gets or sets the instrumentation key for Application Insights.
+            Serialized as "iKey" in the JSON payload.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.HttpTelemetrySender.ApplicationInsightsEnvelope.Tags">
+            <summary>
+            Gets or sets the telemetry tags for context information.
+            Omitted from the JSON payload when null.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.HttpTelemetrySender.ApplicationInsightsEnvelope.Data">
+            <summary>
+            Gets or sets the telemetry data payload.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Telemetry.HttpTelemetrySender.ApplicationInsightsTelemetryData">
+            <summary>
+            Represents the telemetry data wrapper for Application Insights.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.HttpTelemetrySender.ApplicationInsightsTelemetryData.BaseType">
+            <summary>
+            Gets or sets the base type of the telemetry data.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.HttpTelemetrySender.ApplicationInsightsTelemetryData.BaseData">
+            <summary>
+            Gets or sets the base data payload.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Telemetry.HttpTelemetrySender.ApplicationInsightsEventData">
+            <summary>
+            Represents the event data structure for Application Insights.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.HttpTelemetrySender.ApplicationInsightsEventData.Name">
+            <summary>
+            Gets or sets the name of the event.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.HttpTelemetrySender.ApplicationInsightsEventData.Properties">
+            <summary>
+            Gets or sets the dictionary of event properties.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Telemetry.InstallationIdProvider">
+            <summary>
+            Provides a unique, persistent, and hashed installation ID for telemetry tracking.
+            The installation ID is stored locally and hashed using SHA256.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.InstallationIdProvider.Value">
+            <summary>
+            Lazy-initialized value containing the hashed installation ID.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.InstallationIdProvider.Get">
+            <summary>
+            Gets the hashed installation ID, creating and persisting it if necessary.
+            </summary>
+            <returns>The hashed installation ID.</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.InstallationIdProvider.Create">
+            <summary>
+            Creates a new installation ID, persists it to disk, and returns the hashed value.
+            If an existing installation ID is found, it is loaded and hashed.
+            </summary>
+            <returns>The hashed installation ID.</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.InstallationIdProvider.Hash(System.String)">
+            <summary>
+            Hashes the given value using SHA256 and returns the Base64 encoded result.
+            </summary>
+            <param name="value">The value to hash.</param>
+            <returns>The Base64 encoded SHA256 hash of the value.</returns>
+        </member>
+        <member name="T:Syncfusion.Telemetry.ITelemetrySender">
+            <summary>
+            Interface for sending telemetry batches to a remote server.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.ITelemetrySender.SendAsync(Syncfusion.Telemetry.TelemetryBatch,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously sends a batch of telemetry events to the server.
+            </summary>
+            <param name="batch">The telemetry batch to send.</param>
+            <param name="cancellationToken">A cancellation token to cancel the operation.</param>
+            <returns>A task representing the asynchronous send operation.</returns>
+        </member>
+        <member name="T:Syncfusion.Telemetry.Telemetry">
+            <summary>
+            Provides methods and properties for managing telemetry tracking in Syncfusion applications.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.Telemetry.Lock">
+            <summary>
+            A lock object used to ensure thread-safety when accessing or modifying the telemetry client.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.Telemetry._client">
+            <summary>
+            The underlying telemetry client instance used for tracking telemetry data.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.Telemetry.IsTelemetryEnabled">
+            <summary>
+            Gets or sets a value indicating whether telemetry tracking is enabled.
+            </summary>
+            <value><c>true</c> if telemetry is enabled; otherwise, <c>false</c>. The default value is <c>true</c>.</value>
+        </member>
+        <member name="M:Syncfusion.Telemetry.Telemetry.Disable">
+            <summary>
+            Disables telemetry tracking for the application.
+            </summary>
+            <remarks>
+            When called, this method sets <see cref="P:Syncfusion.Telemetry.Telemetry.IsTelemetryEnabled"/> to <c>false</c>, preventing
+            any further telemetry data from being collected or sent.
+            </remarks>
+            <example>
+            The following example demonstrates how to disable telemetry:
+            <code lang="csharp">
+            Telemetry.Disable();
+            </code>
+            </example>
+        </member>
+        <member name="M:Syncfusion.Telemetry.Telemetry.Configure(Syncfusion.Telemetry.TelemetryOptions)">
+            <summary>
+            Configures the telemetry client with the specified options.
+            </summary>
+            <param name="options"> <see cref="T:Syncfusion.Telemetry.TelemetryOptions"/>.</param>
+            <remarks>
+            This method creates a new <see cref="T:Syncfusion.Telemetry.TelemetryClient"/> instance with the provided options.
+            If a client already exists, it will be disposed and replaced. This method is thread-safe.
+            </remarks>
+        </member>
+        <member name="M:Syncfusion.Telemetry.Telemetry.TrackComponent(Syncfusion.Telemetry.ComponentName,Syncfusion.Telemetry.TelemetryOptions)">
+            <summary>
+            Tracks the usage of a component in the application.
+            </summary>
+            <param name="componentName">The name of the component being tracked.</param>
+            <remarks>
+            This method records when a specific component is used and automatically flushes
+            the telemetry data asynchronously after tracking. Exceptions during tracking or
+            flushing are silently caught and ignored.
+            </remarks>
+        </member>
+        <member name="M:Syncfusion.Telemetry.Telemetry.LogTelemetryAsync">
+            <summary>
+            Asynchronously logs and flushes the telemetry data.
+            </summary>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.Telemetry.ShouldWaitForTelemetryFlush">
+            <summary>
+            Determines whether telemetry flushes should be waited on synchronously.
+            </summary>
+            <remarks>
+            UI applications such as .NET MAUI can deadlock when blocking on the UI thread,
+            so we avoid synchronous waiting when a synchronization context is present.
+            Blazor WebAssembly doesn't support blocking operations at all.
+            Console and background-thread scenarios continue to block so telemetry can be sent
+            before the process exits.
+            </remarks>
+        </member>
+        <member name="P:Syncfusion.Telemetry.Telemetry.DesignMode">
+            <summary>
+            Get the Visual Studio is runing. 
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.Telemetry.IsLinux">
+            <summary>
+            Checks the environment is IsLinux. 
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.Telemetry.IsDesigner">
+            <summary>
+            Check the Designing mode
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.Telemetry.IsDesignerMode">
+            <summary>
+            Detects XAML designer mode.
+            Supported designer processes:
+            - xdesproc, devenv (Visual Studio)
+            - wpfsurface, designtoolsserver (VS 2022)
+            - riderwpfpreviewerlauncher (JetBrains Rider)
+            For "dotnet" processes, excludes test runners by checking for
+            loaded test runner assemblies (e.g. ReSharper, dotCover).
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.Telemetry.IsTestRunnerContext">
+            <summary>
+            Detects whether the current process is a unit test runner (VS Test Explorer,
+            ReSharper, dotCover, etc.) by checking loaded assemblies in the AppDomain.
+            </summary>
+            <returns>true when a known test framework assembly is loaded.</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.Telemetry.IsRunningOnWebAssembly">
+            <summary>
+            Checks if the application is running on Blazor WebAssembly.
+            </summary>
+            <returns>True if running on WebAssembly, false otherwise.</returns>
+            <remarks>
+            Compatible with .NET 6, 7, 8, 9, 10 and future versions.
+            Uses multiple detection methods for maximum reliability.
+            </remarks>
+        </member>
+        <member name="M:Syncfusion.Telemetry.Telemetry.TrackFeature(System.String,Syncfusion.Telemetry.ComponentName,Syncfusion.Telemetry.TelemetryOptions)">
+            <summary>
+            Tracks the usage of a feature in the application.
+            </summary>
+            <param name="featureName">The name of the feature being tracked.</param>
+            <param name="componentName">The component associated with the feature.</param>
+            <param name="options">The telemetry options to configure the client.</param>
+            <remarks>
+            This method records when a specific feature is used. Exceptions during tracking
+            are silently caught and ignored.
+            </remarks>
+        </member>
+        <member name="M:Syncfusion.Telemetry.Telemetry.FlushAsync(System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously flushes the telemetry data to the server.
+            </summary>
+            <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+            <returns>A task that represents the asynchronous flush operation.</returns>
+            <internal/>
+        </member>
+        <member name="M:Syncfusion.Telemetry.Telemetry.FlushAsync">
+            <summary>
+            Asynchronously flushes the telemetry data to the server using the default cancellation token.
+            </summary>
+            <returns>A task that represents the asynchronous flush operation.</returns>
+            <internal/>
+        </member>
+        <member name="M:Syncfusion.Telemetry.Telemetry.EnableCustomerInsights(Syncfusion.Telemetry.TelemetryOptions)">
+             <summary>
+             Enables customer Azure Insights logging with the specified connection string.
+             </summary>
+             <param name="options">The telemetry options containing customer connection details.</param>
+             <returns>A <see cref="T:Syncfusion.Telemetry.CustomerInsightsValidationResult"/> indicating success or failure.</returns>
+             <remarks>
+             This method validates the customer's connection string through three layers:
+             Layer 1: Format validation (Base64 decoding, structure)
+             Layer 2: Semantic validation (GUID format, HTTPS URL)
+             Layer 3: Connectivity validation (HTTP test to endpoint)
+            
+             If validation succeeds, all future telemetry will be sent to both Syncfusion 
+             and customer Azure Insights. If validation fails, telemetry continues to be 
+             sent only to Syncfusion.
+            
+             This method never throws an exception. All errors are captured in the result.
+             </remarks>
+             <example>
+             <code>
+             var options = new TelemetryOptions 
+             { 
+                 CustomerConnectionString = "base64-encoded-connection-string"
+             };
+             var result = Telemetry.EnableCustomerInsights(options);
+             if (result.IsValid)
+             {
+                 Console.WriteLine("Customer insights enabled!");
+             }
+             else
+             {
+                 Console.WriteLine($"Error: {result.Message}");
+             }
+             </code>
+             </example>
+        </member>
+        <member name="M:Syncfusion.Telemetry.Telemetry.Shutdown">
+            <summary>
+            Shuts down the telemetry client and releases all resources.
+            </summary>
+            <remarks>
+            This method disposes the current <see cref="T:Syncfusion.Telemetry.TelemetryClient"/> instance and sets it to <c>null</c>.
+            This method is thread-safe.
+            </remarks>
+            <internal/>
+        </member>
+        <member name="T:Syncfusion.Telemetry.TelemetryBatch">
+            <summary>
+            Represents a batch of telemetry events to be sent to the server.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryBatch.SchemaVersion">
+            <summary>
+            Gets or sets the schema version of the batch format.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryBatch.SdkVersion">
+            <summary>
+            Gets or sets the SDK version associated with this batch.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryBatch.SessionId">
+            <summary>
+            Gets or sets the hashed session ID for this batch.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryBatch.InstallationId">
+            <summary>
+            Gets or sets the hashed installation ID for this batch.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryBatch.CreatedAt">
+            <summary>
+            Gets or sets the timestamp when the batch was created.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryBatch.Events">
+            <summary>
+            Gets or sets the collection of telemetry events in this batch.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Telemetry.TelemetryClient">
+            <summary>
+            Manages telemetry event collection, queuing, and transmission.
+            Handles batching, deduplication, and retry logic for telemetry events.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.TelemetryClient._options">
+            <summary>
+            Configuration options for telemetry collection.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.TelemetryClient._sender">
+            <summary>
+            The sender responsible for transmitting telemetry data.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.TelemetryClient._queue">
+            <summary>
+            Queue for pending telemetry events to be sent.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.TelemetryClient._sessionDedup">
+            <summary>
+            Set of hashed deduplication keys for session-level deduplication.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.TelemetryClient._dailyDedup">
+            <summary>
+            Set of hashed deduplication keys for daily-level deduplication.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.TelemetryClient._dedupLock">
+            <summary>
+            Lock object for thread-safe deduplication operations.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.TelemetryClient._timer">
+            <summary>
+            Timer for periodic flushing of queued telemetry events.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.TelemetryClient._sessionId">
+            <summary>
+            The hashed session ID for this telemetry client instance.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.TelemetryClient._isFlushing">
+            <summary>
+            Flag to prevent concurrent flush operations.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.TelemetryClient._disposed">
+            <summary>
+            Flag indicating whether this instance has been disposed.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryClient.#ctor(Syncfusion.Telemetry.TelemetryOptions,System.Net.Http.HttpClient)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Syncfusion.Telemetry.TelemetryClient"/> class.
+            </summary>
+            <param name="options">The telemetry configuration options.</param>
+            <param name="httpClient">The HTTP client to use for sending telemetry. If null, a new instance will be created.</param>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryClient.#ctor(Syncfusion.Telemetry.TelemetryOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Syncfusion.Telemetry.TelemetryClient"/> class with a default HTTP client.
+            </summary>
+            <param name="options">The telemetry configuration options.</param>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryClient.TrackComponent(Syncfusion.Telemetry.ComponentName)">
+            <summary>
+            Tracks the initialization or usage of a component.
+            </summary>
+            <param name="componentName">The name of the component to track.</param>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryClient.TrackFeature(Syncfusion.Telemetry.ComponentName,System.String)">
+            <summary>
+            Tracks the usage of a feature.
+            </summary>
+            <param name="featureName">The name of the feature to track.</param>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryClient.FlushAsync">
+            <summary>
+            Asynchronously flushes all pending telemetry events with no cancellation token.
+            </summary>
+            <returns>A task representing the asynchronous flush operation.</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryClient.FlushAsync(System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously flushes all pending telemetry events.
+            </summary>
+            <param name="cancellationToken">A cancellation token to cancel the flush operation.</param>
+            <returns>A task representing the asynchronous flush operation.</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryClient.FormatSdkVersion(System.String)">
+            <summary>
+            Formats the SDK version by removing the revision digit (4th digit) and extracting semantic versioning.
+            Converts versions like "34.2.2.0" to "34.2.2" and handles cases where framework info is embedded
+            (e.g., "34.2462.5" for .NET 4.62 framework becomes "34.2.5").
+            </summary>
+            <param name="version">The version string (e.g., "34.2.2.0", "34.2462.5").</param>
+            <returns>The formatted semantic version (e.g., "34.2.2"), or the original version if formatting fails.</returns>
+        </member>
+        <member name="T:Syncfusion.Telemetry.TelemetryEnvironmentDetector">
+            <summary>
+            Detects the runtime environment (Development, Production, CI, etc.) for telemetry classification.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryEnvironmentDetector.GetEnvironment">
+            <summary>
+            Detects the current environment at runtime.
+            </summary>
+            <returns>Environment name: "CI", "AutomatedTests", "Development", "Production", or "Unknown"</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryEnvironmentDetector.IsCIEnvironment">
+            <summary>
+            Detects if running in a CI/CD environment.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryEnvironmentDetector.IsAutomatedTestEnvironment">
+            <summary>
+            Detects if running in an automated test environment.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryEnvironmentDetector.IsHostedEnvironment">
+            <summary>
+            Detects if running in a hosted/server environment.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Telemetry.TelemetryEvent">
+            <summary>
+            Represents a single telemetry event containing product usage information.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryEvent.EventName">
+            <summary>
+            Gets or sets the name of the event.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryEvent.Timestamp">
+            <summary>
+            Gets or sets the timestamp when the event occurred.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryEvent.InstallationId">
+            <summary>
+            Gets or sets the hashed installation ID.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryEvent.SessionId">
+            <summary>
+            Gets or sets the hashed session ID.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryEvent.SdkName">
+            <summary>
+            Gets or sets the name of the SDK that generated this event.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryEvent.PlatformName">
+            <summary>
+            Gets or sets the name of the platform.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryEvent.SdkVersion">
+            <summary>
+            Gets or sets the version of the SDK.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryEvent.ComponentName">
+            <summary>
+            Gets or sets the name of the component being tracked.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryEvent.FeatureName">
+            <summary>
+            Gets or sets the name of the feature being tracked.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryEvent.Framework">
+            <summary>
+            Gets or sets the framework information.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryEvent.FrameworkVersion">
+            <summary>
+            Gets or sets the framework version.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryEvent.Environment">
+            <summary>
+            Gets or sets the environment in which the event occurred.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryEvent.LicenseCategory">
+            <summary>
+            Gets or sets the license category.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryEvent.Priority">
+            <summary>
+            Gets or sets the priority level of the event.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryEvent.MachineName">
+            <summary>
+            Gets or sets the hashed machine name.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryEvent.SessionDedupKey">
+            <summary>
+            Gets the deduplication key for session-level duplicate detection.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryEvent.DailyDedupKey">
+            <summary>
+            Gets the deduplication key for daily-level duplicate detection.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Telemetry.TelemetryJson">
+            <summary>
+            Provides lightweight JSON serialization for Application Insights telemetry payloads
+            without any external package dependency.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryJson.Serialize(System.Collections.Generic.IList{Syncfusion.Telemetry.HttpTelemetrySender.ApplicationInsightsEnvelope})">
+            <summary>
+            Serializes a list of <see cref="T:Syncfusion.Telemetry.HttpTelemetrySender.ApplicationInsightsEnvelope"/> items
+            to a compact JSON string that matches the Application Insights ingestion format.
+            </summary>
+            <param name="envelopes">The envelope list produced by <c>CreateApplicationInsightsPayload</c>.</param>
+            <returns>A JSON array string, or <c>"[]"</c> when the list is null or empty.</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryJson.WriteEnvelope(System.Text.StringBuilder,Syncfusion.Telemetry.HttpTelemetrySender.ApplicationInsightsEnvelope)">
+            <summary>
+            Writes a single envelope object.
+            Guards against null <c>Data</c> to prevent NullReferenceException.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryJson.WriteData(System.Text.StringBuilder,Syncfusion.Telemetry.HttpTelemetrySender.ApplicationInsightsTelemetryData)">
+            <summary>
+            Writes the "data" wrapper object.
+            Guards against null <c>BaseData</c>.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryJson.WriteBaseData(System.Text.StringBuilder,Syncfusion.Telemetry.HttpTelemetrySender.ApplicationInsightsEventData)">
+            <summary>
+            Writes the "baseData" object.
+            Includes the required "ver":2 field that Application Insights expects
+            for all EventData payloads, regardless of connection string variant.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryJson.WriteStringDictionary(System.Text.StringBuilder,System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Writes a JSON object field whose value is a string-to-string dictionary.
+            Skips entries with a null key.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryJson.WriteString(System.Text.StringBuilder,System.String,System.String)">
+            <summary>
+            Writes a single JSON string field: <c>"key":"value"</c>.
+            A null <paramref name="value"/> is written as an empty string.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryJson.AppendEscaped(System.Text.StringBuilder,System.String)">
+            <summary>
+            Appends a JSON-escaped version of <paramref name="s"/> to <paramref name="sb"/>.
+            Handles all control characters and escape sequences required by RFC 8259 §7.
+            A null <paramref name="s"/> is treated as an empty string.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Telemetry.TelemetryOptions">
+            <summary>
+            Provides configuration options for Syncfusion Telemetry.
+            </summary>
+            <remarks>
+            This class contains all configurable properties for telemetry collection and delivery.
+            Default values are set in the constructor.
+            </remarks>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryOptions.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Syncfusion.Telemetry.TelemetryOptions"/> class with default settings.
+            </summary>
+            <remarks>
+            Default values include: telemetry enabled, gzip compression enabled,
+            batch size of 25 events, batch interval of 60 seconds, and more.
+            </remarks>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.Enabled">
+            <summary>
+            Gets or sets a value indicating whether telemetry is enabled.
+            </summary>
+            <value><c>true</c> if telemetry is enabled; otherwise, <c>false</c>. Default is <c>true</c>.</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.ConnectionString">
+            <summary>
+            Gets or sets the Azure Application Insights connection string.
+            </summary>
+            <value>The connection string containing instrumentation key and ingestion endpoint.</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.Endpoint">
+            <summary>
+            Gets or sets the fallback endpoint for telemetry data when no connection string is provided.
+            </summary>
+            <value>The telemetry endpoint URL. Default is "https://dc.services.visualstudio.com".</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.SdkName">
+            <summary>
+            Gets or sets the name of the SDK sending telemetry.
+            </summary>
+            <value>The SDK name, such as "Syncfusion.Telemetry".</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.SdkVersion">
+            <summary>
+            Gets or sets the version of the SDK sending telemetry.
+            </summary>
+            <value>The SDK version string.</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.PlatformName">
+            <summary>
+            Gets or sets the name of the Platform sending telemetry.
+            </summary>
+            <value>The Platform Name string.</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.ServiceName">
+            <summary>
+            Gets or sets the name of the service sending telemetry.
+            </summary>
+            <value>The service name.</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.ServiceVersion">
+            <summary>
+            Gets or sets the version of the service sending telemetry.
+            </summary>
+            <value>The service version.</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.Framework">
+            <summary>
+            Gets or sets the framework being used (e.g., .NET, .NET Core).
+            </summary>
+            <value>The framework name.</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.FrameworkVersion">
+            <summary>
+            Gets or sets the version of the framework being used.
+            </summary>
+            <value>The framework version.</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.OperatingSystem">
+            <summary>
+            Gets or sets the operating system description.
+            </summary>
+            <value>The OS description, such as "Windows 10" or "Linux 5.4.0".</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.Architecture">
+            <summary>
+            Gets or sets the processor architecture in lowercase format.
+            </summary>
+            <remarks>
+            Returns the processor architecture as lowercase:
+            - "x86" for 32-bit Intel/AMD
+            - "x64" for 64-bit Intel/AMD
+            - "arm" for 32-bit ARM
+            - "arm64" for 64-bit ARM
+            - "wasm" for WebAssembly (.NET 6.0+)
+            </remarks>
+            <value>The architecture in lowercase format (e.g., "x64", "x86", "arm64", "wasm").</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.EnvironmentName">
+            <summary>
+            Gets or sets the environment name (e.g., Development, Production).
+            </summary>
+            <value>The environment name.</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.MaxQueueSize">
+            <summary>
+            Gets or sets the maximum number of events to hold in the queue.
+            </summary>
+            <value>The maximum queue size. Default is 250.</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.BatchSize">
+            <summary>
+            Gets or sets the number of events to send in each batch.
+            </summary>
+            <value>The batch size. Default is 25.</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.BatchInterval">
+            <summary>
+            Gets or sets the interval at which to send batches of telemetry events.
+            </summary>
+            <value>The batch interval. Default is 60 seconds.</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.RequestTimeout">
+            <summary>
+            Gets or sets the timeout for individual HTTP requests.
+            </summary>
+            <value>The request timeout. Default is 120 seconds.</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.MaxRetries">
+            <summary>
+            Gets or sets the maximum number of retry attempts for failed requests.
+            </summary>
+            <value>The maximum retry count. Default is 2.</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.EnableGzip">
+            <summary>
+            Gets or sets a value indicating whether to enable GZIP compression for HTTP requests.
+            </summary>
+            <value><c>true</c> to enable GZIP compression; otherwise, <c>false</c>. Default is <c>true</c>.</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.ProductionNoOpByDefault">
+            <summary>
+            Gets or sets a value indicating whether to default to no-op in production environments.
+            </summary>
+            <value><c>true</c> to enable production no-op by default; otherwise, <c>false</c>. Default is <c>true</c>.</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.AssemblyName">
+            <summary>
+            Gets or sets the name of the assembly sending telemetry.
+            </summary>
+            <value>The assembly name.</value>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryOptions.GetServiceName">
+            <summary>
+            Gets the name of the service/application using the telemetry SDK.
+            </summary>
+            <returns>The service name from the entry assembly, or the app domain name if unavailable.</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryOptions.GetServiceVersion">
+            <summary>
+            Gets the version of the service/application using the telemetry SDK.
+            </summary>
+            <returns>The service version, or "unknown" if unavailable.</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryOptions.GetOSPlatform">
+            <summary>
+            Gets the OS platform name
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetryOptions.IsWebAssembly">
+            <summary>
+            Detects if the current runtime is WebAssembly (browser-based).
+            </summary>
+            <returns><c>true</c> if running in a WebAssembly environment; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.EnableCustomerInsights">
+            <summary>
+            Gets or sets a value indicating whether customer insights logging is enabled.
+            </summary>
+            <value><c>true</c> to enable customer insights logging; otherwise, <c>false</c>. Default is <c>false</c>.</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.CustomerConnectionString">
+            <summary>
+            Gets or sets the customer's Azure Application Insights connection string.
+            </summary>
+            <value>The Base64-encoded connection string, or <c>null</c> if not configured.</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.CustomerInstrumentationKey">
+            <summary>
+            Gets or sets the customer's instrumentation key (alternative to connection string).
+            </summary>
+            <value>The instrumentation key, or <c>null</c> if not configured.</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.CustomerIngestionEndpoint">
+            <summary>
+            Gets or sets the customer's ingestion endpoint URL (alternative to connection string).
+            </summary>
+            <value>The ingestion endpoint URL, or <c>null</c> if not configured.</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.SkipCustomerValidation">
+            <summary>
+            Gets or sets a value indicating whether to skip customer configuration validation.
+            Used for testing purposes only. Production should always use validation.
+            </summary>
+            <value><c>true</c> to skip validation; otherwise, <c>false</c>. Default is <c>false</c>.</value>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.ValidatedCustomerInstrumentationKey">
+            <summary>
+            Gets the validated customer instrumentation key (internal use).
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.TelemetryOptions.ValidatedCustomerIngestionEndpoint">
+            <summary>
+            Gets the validated customer ingestion endpoint (internal use).
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Telemetry.TelemetrySanitizer">
+            <summary>
+            Provides sanitization methods for telemetry data to ensure data quality and privacy.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.TelemetrySanitizer.MaxNameLength">
+            <summary>
+            Maximum allowed length for sanitized names.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetrySanitizer.SafeName(System.String)">
+            <summary>
+            Sanitizes a name by removing unsafe characters and truncating if necessary.
+            Only alphanumeric characters, underscores, hyphens, and dots are allowed.
+            </summary>
+            <param name="value">The name to sanitize.</param>
+            <returns>The sanitized name, or "Unknown" if the input is null, empty, or contains no valid characters.</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetrySanitizer.ExtractFrameworkName(System.String)">
+            <summary>
+            Extracts the framework name from the full framework description.
+            Removes version information to get just the framework type.
+            </summary>
+            <param name="frameworkDescription">The full framework description (e.g., ".NET 10.0.0.1" or ".NET Framework 4.8.1").</param>
+            <returns>The framework name without version (e.g., ".NET" or ".NET Framework"), or "Unknown" if input is invalid.</returns>
+            <remarks>
+            Examples:
+            - ".NET 10.0.0.1" → ".NET"
+            - ".NET Framework 4.8.1" → ".NET Framework"
+            - ".NET 5.0.10" → ".NET"
+            </remarks>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetrySanitizer.FormatSdkName(System.String)">
+            <summary>
+            Normalizes an SDK name by removing all spaces.
+            Converts "Chart SDK" to "ChartSDK", keeps "DocumentSDK" as "DocumentSDK", etc.
+            </summary>
+            <param name="sdkName">The SDK name to normalize.</param>
+            <returns>The normalized SDK name without spaces, or the original value if null/empty.</returns>
+            <remarks>
+            Removes all spaces from the SDK name to ensure consistent formatting.
+            Examples:
+            - "DocumentSDK" → "DocumentSDK"
+            - "GridSDK" → "GridSDK"
+            - "Chart SDK" → "ChartSDK"
+            - "My Custom SDK" → "MyCustomSDK"
+            </remarks>
+        </member>
+        <member name="M:Syncfusion.Telemetry.TelemetrySanitizer.ValidateAndNormalizeSdkName(System.String)">
+             <summary>
+             Validates and normalizes an SDK name against the list of valid Syncfusion SDK names.
+             Handles variations like "Chart SDK", "ChartsSDK", "Charts SDK" and maps them to "ChartSDK".
+             </summary>
+             <param name="sdkName">The SDK name to validate and normalize.</param>
+             <returns>The valid normalized SDK name if a match is found; otherwise, returns the formatted input SDK name for reporting.</returns>
+             <remarks>
+             Valid SDK names are:
+             - GridSDK
+             - ChartSDK
+             - DiagramSDK
+             - RichTextEditorSDK
+             - FileManagerSDK
+             - GanttSDK
+             - SchedulerSDK
+             - SpreadsheetEditorSDK
+             - DOCXEditorSDK
+             - PDFViewerSDK
+             - DocumentSDK
+            
+             Examples:
+             - "Chart SDK" → "ChartSDK" (valid)
+             - "Charts SDK" → "ChartSDK" (corrected from typo)
+             - "ChartSDK" → "ChartSDK" (valid)
+             - "DOCX Editor SDK" → "DOCXEditorSDK" (valid)
+             </remarks>
+        </member>
+        <member name="T:Syncfusion.Telemetry.ConnectionStringValidator">
+            <summary>
+            Validates Azure Application Insights connection strings with three-layer validation.
+            Layer 1: Format validation (Base64 decoding, structure)
+            Layer 2: Semantic validation (GUID format, HTTPS URL)
+            Layer 3: Connectivity validation (HTTP test to endpoint)
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.ConnectionStringValidator.Validate(System.String)">
+            <summary>
+            Validates a connection string through all three layers.
+            </summary>
+            <param name="connectionString">The Base64-encoded connection string to validate.</param>
+            <returns>ValidationResult indicating success or failure with details.</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.ConnectionStringValidator.ValidateFormat(System.String)">
+            <summary>
+            Layer 1: Validates format - Base64 decoding (optional) and structure.
+            Handles both Base64-encoded and plain text connection strings.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.ConnectionStringValidator.ValidateSemantic(System.String,System.String)">
+            <summary>
+            Layer 2: Validates semantic meaning - GUID format and HTTPS URL.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.ConnectionStringValidator.ValidateConnectivityAsync(System.String,System.String)">
+            <summary>
+            Layer 3: Validates connectivity - HTTP test to Azure endpoint with REAL telemetry event.
+            Verifies the ingestion endpoint is reachable, valid, AND can accept data with the InstrumentationKey.
+            ✅ CRITICAL FIX: Sends real telemetry event with InstrumentationKey in URL query parameter
+            This ensures invalid keys are rejected (HTTP 401) instead of returning 200 OK
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Telemetry.CustomerInsightsValidationResult">
+            <summary>
+            Represents the result of customer insights configuration.
+            Returned to customers when they call EnableCustomerInsights().
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.CustomerInsightsValidationResult.IsConfigured">
+            <summary>
+            Gets a value indicating whether customer insights is currently configured.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.CustomerInsightsValidationResult.IsValid">
+            <summary>
+            Gets a value indicating whether the customer configuration is valid.
+            Only meaningful if IsConfigured is true.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.CustomerInsightsValidationResult.Message">
+            <summary>
+            Gets a human-readable message describing the configuration result.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.CustomerInsightsValidationResult.IngestionEndpoint">
+            <summary>
+            Gets the ingestion endpoint URL if configuration was successful.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.CustomerInsightsValidationResult.ConfigurationSuccess(System.String)">
+            <summary>
+            Creates a success result - customer insights enabled.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.CustomerInsightsValidationResult.ConfigurationFailure(System.String)">
+            <summary>
+            Creates a failure result - invalid customer configuration.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.CustomerInsightsValidationResult.NotConfigured">
+            <summary>
+            Creates a result - customer insights not configured.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Telemetry.ValidationResult">
+            <summary>
+            Represents the result of connection string validation.
+            Used internally to track validation progress through all three layers.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.ValidationResult.IsValid">
+            <summary>
+            Gets a value indicating whether the validation was successful.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.ValidationResult.InstrumentationKey">
+            <summary>
+            Gets the instrumentation key extracted from the connection string.
+            Valid only if IsValid is true.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.ValidationResult.IngestionEndpoint">
+            <summary>
+            Gets the ingestion endpoint URL.
+            Valid only if IsValid is true.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.ValidationResult.ErrorMessage">
+            <summary>
+            Gets the error message if validation failed.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.ValidationResult.FailedLayer">
+            <summary>
+            Gets which validation layer failed (1, 2, 3, or 0 if successful).
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.ValidationResult.Success(System.String,System.String)">
+            <summary>
+            Creates a successful validation result.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.ValidationResult.Failure(System.String,System.Int32)">
+            <summary>
+            Creates a failed validation result.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Telemetry.CustomerInsightsManager">
+            <summary>
+            Manages customer telemetry configuration globally for the application.
+            
+            Supports multiple customer telemetry platforms:
+            - Azure Application Insights (via connection string)
+            - AWS CloudWatch Logs (via AWS credentials)
+            
+            This is a static manager that stores customer connection details once during application
+            startup, and makes them available throughout the application lifetime for automatic
+            dual-logging of telemetry data.
+            
+            USAGE:
+            ------
+              // Setup Azure (optional)
+              var azureResult = CustomerInsightsManager.SetupCustomerInsights(connectionString);
+              
+              // Setup AWS CloudWatch (optional)
+              var awsResult = CustomerInsightsManager.SetupAwsCloudWatch(awsConnectionString);
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.CustomerInsightsManager._customerConfig">
+            <summary>
+            Holds the validated customer Azure Application Insights configuration.
+            Private - accessed only through IsConfigured property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.CustomerInsightsManager._awsConfig">
+            <summary>
+            Holds the validated customer AWS CloudWatch Logs configuration.
+            Private - accessed only through IsAwsConfigured property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.CustomerInsightsManager._configLock">
+            <summary>
+            Lock for thread-safe access to the customer config.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.CustomerInsightsManager.IsConfigured">
+            <summary>
+            Gets a value indicating whether customer insights has been successfully configured.
+            </summary>
+            <returns>
+            <c>true</c> if customer insights connection is configured and valid;
+            otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="P:Syncfusion.Telemetry.CustomerInsightsManager.InstrumentationKey">
+            <summary>
+            Gets the instrumentation key if customer insights is configured.
+            </summary>
+            <returns>The instrumentation key, or <c>null</c> if not configured.</returns>
+        </member>
+        <member name="P:Syncfusion.Telemetry.CustomerInsightsManager.IngestionEndpoint">
+            <summary>
+            Gets the ingestion endpoint if customer insights is configured.
+            </summary>
+            <returns>The ingestion endpoint URL, or <c>null</c> if not configured.</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.CustomerInsightsManager.SetupCustomerInsights(System.String)">
+            <summary>
+            Sets up customer Azure Application Insights with validation.
+            
+            This method should be called once during application startup (in Main() or Program.cs).
+            It validates the connection string through all 3 layers (syntax, semantic, connectivity)
+            and stores the validated configuration for use throughout the application.
+            
+            After successful setup, all telemetry events are automatically logged to both
+            Syncfusion and customer endpoints.
+            </summary>
+            <param name="connectionString">The Base64-encoded Azure Application Insights connection string.</param>
+            <returns>
+            A CustomerInsightsValidationResult indicating success or failure.
+            
+            If successful (IsValid = true):
+              - Customer insights is configured and ready
+              - All telemetry will be logged to both endpoints
+              - IngestionEndpoint will be set
+            
+            If failed (IsValid = false):
+              - Check Message property for error details
+              - Telemetry will continue with Syncfusion endpoint only
+              - Customer insights will not be used
+            </returns>
+            <remarks>
+            Thread-safe. Can be called from multiple threads, but typically called
+            once during application startup.
+            
+            This method never throws exceptions. All validation errors are captured
+            in the returned result object.
+            
+            VALIDATION LAYERS:
+            - Layer 1 (Syntax): Validates Base64 encoding and key-value structure
+            - Layer 2 (Semantic): Validates GUID format and HTTPS URL
+            - Layer 3 (Connectivity): Tests HTTP connectivity to the endpoint
+            
+            If any layer fails, the configuration is not stored and an error is returned.
+            </remarks>
+            <example>
+            In Program.cs:
+              var connectionString = Environment.GetEnvironmentVariable("CUSTOMER_INSIGHTS_CONNECTION");
+              var result = CustomerInsightsManager.SetupCustomerInsights(connectionString);
+              
+              if (result.IsValid)
+              {
+                  Console.WriteLine("✓ Customer insights configured!");
+              }
+              
+              // Now use telemetry normally - it will automatically log to both endpoints
+              Telemetry.Configure(options);
+              Telemetry.TrackFeature("MyFeature", ComponentName.Grid);
+            </example>
+        </member>
+        <member name="P:Syncfusion.Telemetry.CustomerInsightsManager.IsAwsConfigured">
+            <summary>
+            Gets a value indicating whether AWS CloudWatch has been successfully configured.
+            </summary>
+            <returns>
+            <c>true</c> if AWS CloudWatch connection is configured and valid;
+            otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="P:Syncfusion.Telemetry.CustomerInsightsManager.AwsConfig">
+            <summary>
+            Gets the AWS CloudWatch configuration if configured.
+            </summary>
+            <returns>The AwsConnectionConfig object, or <c>null</c> if not configured.</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.CustomerInsightsManager.SetupAwsCloudWatch(System.String)">
+            <summary>
+            Sets up AWS CloudWatch Logs with validation.
+            
+            This method should be called once during application startup (in Program.cs or Main()).
+            It validates the connection string through all 3 layers (syntax, semantic, connectivity)
+            and stores the validated configuration for use throughout the application.
+            
+            After successful setup, all telemetry events are automatically logged to both
+            Syncfusion and AWS CloudWatch endpoints.
+            </summary>
+            <param name="connectionString">
+            The Base64-encoded AWS connection string.
+            Format: AccessKeyId=AKIA...;SecretAccessKey=wJal...;Region=us-east-1;LogGroupName=/my-app/telemetry;LogStreamName=stream1
+            </param>
+            <returns>
+            A CustomerInsightsValidationResult indicating success or failure.
+            
+            If successful (IsValid = true):
+              - AWS CloudWatch is configured and ready
+              - All telemetry will be logged to both endpoints
+              - IngestionEndpoint will contain the AWS endpoint URL
+            
+            If failed (IsValid = false):
+              - Check Message property for error details
+              - Telemetry will continue with Syncfusion endpoint only
+              - AWS CloudWatch will not be used
+            </returns>
+            <remarks>
+            Thread-safe. Can be called from multiple threads, but typically called
+            once during application startup.
+            
+            This method never throws exceptions. All validation errors are captured
+            in the returned result object.
+            
+            VALIDATION LAYERS:
+            - Layer 1 (Format): Validates Base64 encoding and key-value structure
+            - Layer 2 (Semantic): Validates AWS key format and region code
+            - Layer 3 (Connectivity): Tests AWS API connection to verify credentials
+            
+            If any layer fails, the configuration is not stored and an error is returned.
+            </remarks>
+            <example>
+            In Program.cs:
+              var connectionString = Environment.GetEnvironmentVariable("AWS_CLOUDWATCH_CONNECTION");
+              var result = CustomerInsightsManager.SetupAwsCloudWatch(connectionString);
+              
+              if (result.IsValid)
+              {
+                  Console.WriteLine("✓ AWS CloudWatch configured!");
+              }
+              
+              // Now use telemetry normally - it will automatically log to both endpoints
+              Telemetry.Configure(options);
+              Telemetry.TrackFeature("MyFeature", ComponentName.Grid);
+            </example>
+        </member>
+        <member name="M:Syncfusion.Telemetry.CustomerInsightsManager.SetupTelemetry(System.String,System.String)">
+            <summary>
+            Sets up customer telemetry for any supported platform using string-based platform name.
+            
+            Provides a unified entry point for configuring customer telemetry regardless of the
+            underlying platform. Supports configuring multiple platforms simultaneously.
+            
+            USAGE EXAMPLES:
+            ──────────────
+            // Configure Azure
+            var result = CustomerInsightsManager.SetupTelemetry("Azure", azureConnectionString);
+            
+            // Configure AWS CloudWatch
+            var result = CustomerInsightsManager.SetupTelemetry("AwsCloudWatch", awsConnectionString);
+            
+            // Configure both simultaneously (for redundancy or migration)
+            CustomerInsightsManager.SetupTelemetry("Azure", azureConnectionString);
+            CustomerInsightsManager.SetupTelemetry("AwsCloudWatch", awsConnectionString);
+            
+            After setup, all Telemetry.TrackFeature() calls automatically log to all
+            configured platforms.
+            </summary>
+            <param name="platform">
+            Platform name (case-insensitive). Supported values:
+              - "Azure" or "azure" for Azure Application Insights
+              - "AwsCloudWatch" or "awscloudwatch" for AWS CloudWatch Logs
+            </param>
+            <param name="connectionString">
+            The Base64-encoded connection string for the platform.
+            Format depends on platform:
+              - Azure: InstrumentationKey=...;IngestionEndpoint=...
+              - AWS: AccessKeyId=...;SecretAccessKey=...;Region=...;LogGroupName=...
+            </param>
+            <returns>
+            A CustomerInsightsValidationResult indicating success or failure.
+            
+            If successful (IsValid = true):
+              - Platform is configured and ready
+              - All telemetry will be logged to this platform
+              - IngestionEndpoint will be set
+            
+            If failed (IsValid = false):
+              - Check Message property for error details
+              - This platform will not be used
+              - Other configured platforms remain active
+            </returns>
+            <remarks>
+            Thread-safe. Can be called multiple times to configure different platforms.
+            
+            This method never throws exceptions. All validation errors are captured
+            in the returned result object.
+            
+            VALIDATION:
+              - Platform name is validated (must match supported platforms)
+              - Connection string is validated through 3 layers (format, semantic, connectivity)
+              - Configuration is stored only if validation succeeds
+            </remarks>
+            <example>
+            In Program.cs:
+              // Load from environment variables
+              var azureConn = Environment.GetEnvironmentVariable("TELEMETRY_AZURE");
+              var awsConn = Environment.GetEnvironmentVariable("TELEMETRY_AWS");
+              
+              // Configure both platforms
+              if (!string.IsNullOrEmpty(azureConn))
+              {
+                  var azureResult = CustomerInsightsManager.SetupTelemetry("Azure", azureConn);
+                  if (azureResult.IsValid)
+                      Console.WriteLine("✓ Azure telemetry configured");
+              }
+              
+              if (!string.IsNullOrEmpty(awsConn))
+              {
+                  var awsResult = CustomerInsightsManager.SetupTelemetry("AwsCloudWatch", awsConn);
+                  if (awsResult.IsValid)
+                      Console.WriteLine("✓ AWS telemetry configured");
+              }
+              
+              // Now use telemetry - it works with all configured platforms!
+              Telemetry.Configure(options);
+              Telemetry.TrackFeature("AppStarted", ComponentName.General);
+            </example>
+        </member>
+        <member name="M:Syncfusion.Telemetry.CustomerInsightsManager.SetupTelemetry(Syncfusion.Telemetry.CustomerInsightPlaform,System.String)">
+            <summary>
+            Setup Cutomer telemetry
+            </summary>
+            <param name="platform"></param>
+            <param name="connectionString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.CustomerInsightsManager.Clear">
+            <summary>
+            Clears the customer telemetry configuration (both Azure and AWS).
+            After calling this method, telemetry will be logged to Syncfusion endpoint only.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Telemetry.CustomerInsightsManager.CustomerConnectionConfig">
+            <summary>
+            Internal class holding customer connection configuration.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.CustomerInsightsManager.CustomerConnectionConfig.InstrumentationKey">
+            <summary>
+            The instrumentation key for customer Azure Application Insights.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.CustomerInsightsManager.CustomerConnectionConfig.IngestionEndpoint">
+            <summary>
+            The ingestion endpoint URL for customer Azure Application Insights.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.CustomerInsightsManager.CustomerConnectionConfig.ValidationTimestamp">
+            <summary>
+            When this configuration was validated and stored.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.CustomerInsightsManager.ValidateCredentials(Syncfusion.Telemetry.CustomerInsightPlaform,System.String)">
+            <summary>
+            Validate customer telemetry credentials before setup.
+            
+            Use this method to check if credentials are valid without actually setting up.
+            </summary>
+            <param name="platform">The telemetry platform</param>
+            <param name="connectionString">Plain text connection string</param>
+            <returns>Result with validation status</returns>
+        </member>
+        <member name="T:Syncfusion.Telemetry.AwsConnectionConfig">
+            <summary>
+            Represents AWS CloudWatch Logs connection configuration.
+            
+            This immutable class holds validated AWS credentials and CloudWatch Logs
+            configuration for sending telemetry data to customer's AWS account.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsConnectionConfig.AccessKeyId">
+            <summary>
+            Gets the AWS Access Key ID.
+            Format: 20-character alphanumeric string, starts with AKIA or ASIA
+            Example: AKIAIOSFODNN7EXAMPLE
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsConnectionConfig.SecretAccessKey">
+            <summary>
+            Gets the AWS Secret Access Key.
+            Format: 40-character base64-encoded string
+            Example: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+            
+            SECURITY: This is sensitive data. Never log or expose in error messages.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsConnectionConfig.Region">
+            <summary>
+            Gets the AWS Region where CloudWatch Logs are stored.
+            Format: region code like us-east-1, eu-west-1, ap-southeast-1, etc.
+            Example: us-east-1
+            
+            Used to construct the CloudWatch Logs API endpoint:
+            https://logs.{Region}.amazonaws.com/
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsConnectionConfig.LogGroupName">
+            <summary>
+            Gets the CloudWatch Logs Log Group Name.
+            Format: Must start with / (forward slash)
+            Example: /my-app/telemetry, /aws/lambda/my-function
+            
+            The log group must exist in the customer's AWS account.
+            The IAM user must have logs:PutLogEvents permission.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsConnectionConfig.LogStreamName">
+            <summary>
+            Gets the CloudWatch Logs Log Stream Name.
+            Format: Can contain alphanumeric, underscore, hyphen, forward slash, period, hash
+            Example: production-instance-1, app-server-01
+            
+            If not provided, auto-generated as: telemetry-stream-{guid}
+            The log stream must exist within the log group.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsConnectionConfig.IngestionEndpoint">
+            <summary>
+            Gets the CloudWatch Logs API endpoint URL.
+            Auto-calculated from Region.
+            Example: https://logs.us-east-1.amazonaws.com/
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsConnectionConfig.IsValid">
+            <summary>
+            Validates that all required fields are present and non-empty.
+            </summary>
+            <returns>true if configuration is valid; otherwise false</returns>
+        </member>
+        <member name="T:Syncfusion.Telemetry.AwsConnectionStringParser">
+            <summary>
+            Parses AWS CloudWatch connection strings to extract credentials and configuration.
+            
+            This class mirrors the functionality of AzureConnectionStringParser but for AWS.
+            It handles Base64-encoded connection strings in the format:
+            AccessKeyId=AKIA...;SecretAccessKey=wJal...;Region=us-east-1;LogGroupName=/my-app/telemetry;LogStreamName=stream1
+            
+            USAGE:
+            ------
+            var parser = new AwsConnectionStringParser();
+            if (parser.Parse(base64EncodedConnectionString))
+            {
+                string accessKeyId = parser.AccessKeyId;
+                string secretAccessKey = parser.SecretAccessKey;
+                string region = parser.Region;
+                string logGroupName = parser.LogGroupName;
+                string logStreamName = parser.LogStreamName;  // May be empty if not provided
+            }
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsConnectionStringParser.AccessKeyId">
+            <summary>
+            Gets the AWS Access Key ID extracted from the connection string.
+            Example: AKIAIOSFODNN7EXAMPLE
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsConnectionStringParser.SecretAccessKey">
+            <summary>
+            Gets the AWS Secret Access Key extracted from the connection string.
+            Example: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsConnectionStringParser.Region">
+            <summary>
+            Gets the AWS Region extracted from the connection string.
+            Example: us-east-1
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsConnectionStringParser.LogGroupName">
+            <summary>
+            Gets the CloudWatch Log Group Name extracted from the connection string.
+            Example: /my-app/telemetry
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsConnectionStringParser.LogStreamName">
+            <summary>
+            Gets the CloudWatch Log Stream Name extracted from the connection string.
+            Optional - may be empty if not provided in the connection string.
+            Example: production-instance-1
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsConnectionStringParser.Parse(System.String)">
+            <summary>
+            Parses the AWS connection string.
+            
+            Expected connection string format (Base64-encoded):
+            AccessKeyId=AKIAIOSFODNN7EXAMPLE;SecretAccessKey=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY;Region=us-east-1;LogGroupName=/my-app/telemetry;LogStreamName=stream1
+            
+            All fields except LogStreamName are required.
+            </summary>
+            <param name="connectionString">The Base64-encoded connection string to parse.</param>
+            <returns>
+            true if the connection string contains all required fields;
+            otherwise false.
+            </returns>
+            <remarks>
+            PARSING LOGIC:
+            1. Decode Base64 string to UTF-8 plain text
+            2. Split by semicolon to get key=value pairs
+            3. Split each pair by equals sign to get key and value
+            4. Map to properties (case-insensitive)
+            5. Validate all required fields are present
+            
+            SECURITY NOTE:
+            The connection string should be stored securely and never logged.
+            The parsed AccessKeyId and SecretAccessKey are kept in memory.
+            </remarks>
+        </member>
+        <member name="T:Syncfusion.Telemetry.AwsConnectionStringValidator">
+            <summary>
+            Validates AWS CloudWatch connection credentials through three layers.
+            
+            LAYER 1: FORMAT VALIDATION
+              - Access Key ID format (AKIA/ASIA + 16 chars)
+              - Secret Access Key not empty
+              - Region code valid format
+              - Log Group Name valid characters (alphanumeric, -, _, /, .)
+            
+            LAYER 2: SEMANTIC VALIDATION
+              - Access Key ID matches AWS pattern
+              - Secret Access Key is base64-decodable
+              - Region is in known AWS regions list
+              - Log Group Name is non-empty
+            
+            LAYER 3: CONNECTIVITY VALIDATION
+              - Call AWS DescribeLogStreams API
+              - Verify credentials work with AWS
+              - Verify Log Group exists
+              - 10-second timeout
+            
+            USAGE:
+            ------
+            var validator = new AwsConnectionStringValidator();
+            var result = validator.Validate(accessKeyId, secretAccessKey, region, logGroupName, logStreamName);
+            if (result.IsValid)
+                Console.WriteLine("✓ AWS credentials are valid");
+            else
+                Console.WriteLine($"✗ Validation failed: {result.Message}");
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsConnectionStringValidator.Validate(System.String)">
+            <summary>
+            Validates AWS connection string through all three layers.
+            Connection string format:
+              AccessKeyId=AKIA...;SecretAccessKey=...;Region=us-east-1;LogGroupName=/my-app
+            </summary>
+            <param name="connectionString">Plain text AWS connection string</param>
+            <returns>AwsValidationResult indicating success or failure with details</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsConnectionStringValidator.Validate(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Validates AWS connection credentials through all three layers.
+            </summary>
+            <param name="accessKeyId">AWS Access Key ID</param>
+            <param name="secretAccessKey">AWS Secret Access Key</param>
+            <param name="region">AWS Region code</param>
+            <param name="logGroupName">CloudWatch Log Group Name</param>
+            <param name="logStreamName">CloudWatch Log Stream Name (optional)</param>
+            <returns>AwsValidationResult indicating success or failure with details</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsConnectionStringValidator.ValidateFormat(System.String,System.String,System.String,System.String)">
+            <summary>
+            LAYER 1: FORMAT VALIDATION
+            Basic format checks without external dependencies.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsConnectionStringValidator.ValidateSemantic(System.String,System.String,System.String,System.String)">
+            <summary>
+            LAYER 2: SEMANTIC VALIDATION
+            Validates structure and format against AWS specifications.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsConnectionStringValidator.ValidateConnectivityAsync(System.String,System.String,System.String,System.String)">
+            <summary>
+            LAYER 3: CONNECTIVITY VALIDATION
+            Tests AWS CloudWatch Logs connectivity using corrected manual SigV4 implementation.
+            
+            KEY FIXES FOR HTTP 400 BADREQUEST:
+            1. ✅ Content-Type set ONLY via Content property (not in Headers)
+            2. ✅ x-amz-target INCLUDED in signature generation
+            3. ✅ x-amz-date header EXPLICITLY added to request
+            4. ✅ Headers added in CORRECT ORDER
+            5. ✅ No external dependencies (standard .NET only)
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsConnectionStringValidator.ExtractValue(System.String,System.String)">
+            <summary>
+            Helper: Extract value from connection string key=value pairs.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsConnectionStringValidator.IsAlphanumeric(System.String)">
+            <summary>
+            Helper: Check if string is all alphanumeric.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Telemetry.AwsSigV4Signer">
+            <summary>
+            Generates AWS Signature Version 4 (SigV4) authorization headers.
+            
+            AWS SigV4 is the standard authentication mechanism for all AWS APIs.
+            This class handles the cryptographic signing required by CloudWatch Logs API.
+            
+            PROCESS:
+            1. Create canonical request string from HTTP request
+            2. Create string to sign with timestamp and region
+            3. Calculate HMAC-SHA256 signature using AWS credentials
+            4. Format as Authorization header
+            
+            USAGE:
+            ------
+            var signer = new AwsSigV4Signer(accessKeyId, secretAccessKey, region, "logs");
+            var headers = signer.GetAuthHeaders(httpMethod, payload, timestamp);
+            // Add headers to HTTP request
+            
+            REFERENCE:
+            https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsSigV4Signer.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the AwsSigV4Signer class.
+            </summary>
+            <param name="accessKeyId">AWS Access Key ID</param>
+            <param name="secretAccessKey">AWS Secret Access Key</param>
+            <param name="region">AWS Region (e.g., us-east-1)</param>
+            <param name="service">AWS Service (e.g., logs for CloudWatch Logs)</param>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsSigV4Signer.GenerateAuthorizationHeader(System.String,System.String,System.DateTime,System.String)">
+            <summary>
+            Generates AWS SigV4 authorization header.
+            CRITICAL: Must include x-amz-target in signed headers for CloudWatch Logs API!
+            </summary>
+            <param name="httpMethod">HTTP method (POST)</param>
+            <param name="payload">Request body as JSON string</param>
+            <param name="timestamp">Request timestamp (UTC)</param>
+            <param name="xAmzTarget">Optional X-Amz-Target header value (e.g., "Logs_20140328.PutLogEvents")</param>
+            <returns>Dictionary of headers to add to the HTTP request</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsSigV4Signer.CreateRequest(System.String,System.Object)">
+            <summary>
+            Creates an HTTP request with AWS SigV4 signature.
+            </summary>
+            <param name="action">AWS API action (e.g., DescribeLogStreams)</param>
+            <param name="payload">Request payload object</param>
+            <returns>Dictionary of HTTP headers</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsSigV4Signer.ComputeSha256Hash(System.String)">
+            <summary>
+            Computes SHA256 hash of input string.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsSigV4Signer.CalculateSignature(System.String,System.String)">
+            <summary>
+            Calculates AWS SigV4 signature using HMAC-SHA256.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsSigV4Signer.HmacSha256(System.String,System.String)">
+            <summary>
+            Computes HMAC-SHA256 with string key.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsSigV4Signer.HmacSha256(System.Byte[],System.String)">
+            <summary>
+            Computes HMAC-SHA256 with byte array key.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Telemetry.AwsValidationResult">
+            <summary>
+            Represents the result of AWS CloudWatch connection string validation.
+            Used internally to track validation progress through all three layers.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsValidationResult.IsValid">
+            <summary>
+            Gets a value indicating whether the validation was successful.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsValidationResult.AccessKeyId">
+            <summary>
+            Gets the AWS Access Key ID if validation was successful.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsValidationResult.SecretAccessKey">
+            <summary>
+            Gets the AWS Secret Access Key if validation was successful.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsValidationResult.Region">
+            <summary>
+            Gets the AWS Region if validation was successful.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsValidationResult.LogGroupName">
+            <summary>
+            Gets the CloudWatch Log Group Name if validation was successful.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsValidationResult.LogStreamName">
+            <summary>
+            Gets the CloudWatch Log Stream Name if validation was successful.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsValidationResult.ErrorMessage">
+            <summary>
+            Gets the error message if validation failed.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsValidationResult.FailedLayer">
+            <summary>
+            Gets which validation layer failed (1, 2, 3, or 0 if successful).
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsValidationResult.Success(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a successful AWS validation result.
+            </summary>
+            <param name="accessKeyId">AWS Access Key ID</param>
+            <param name="secretAccessKey">AWS Secret Access Key</param>
+            <param name="region">AWS Region code</param>
+            <param name="logGroupName">CloudWatch Log Group Name</param>
+            <param name="logStreamName">CloudWatch Log Stream Name (optional)</param>
+            <returns>Successful validation result with AWS credentials</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsValidationResult.Failure(System.String,System.Int32)">
+            <summary>
+            Creates a failed AWS validation result.
+            </summary>
+            <param name="errorMessage">Description of why validation failed</param>
+            <param name="failedLayer">Which validation layer failed (1, 2, or 3)</param>
+            <returns>Failed validation result with error details</returns>
+        </member>
+        <member name="T:Syncfusion.Telemetry.AwsCloudWatchLogEvent">
+            <summary>
+            Represents an AWS CloudWatch Logs log event.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsCloudWatchLogEvent.Timestamp">
+            <summary>
+            Gets or sets the Unix timestamp in milliseconds.
+            AWS expects camelCase JSON field name: "timestamp"
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsCloudWatchLogEvent.Message">
+            <summary>
+            Gets or sets the log message (typically JSON).
+            AWS expects camelCase JSON field name: "message"
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Telemetry.AwsCloudWatchLogPayload">
+            <summary>
+            Represents an AWS CloudWatch Logs PutLogEvents request payload.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsCloudWatchLogPayload.LogGroupName">
+            <summary>
+            Gets or sets the name of the log group.
+            Example: /my-app/telemetry
+            AWS expects camelCase JSON field name: "logGroupName"
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsCloudWatchLogPayload.LogStreamName">
+            <summary>
+            Gets or sets the name of the log stream within the log group.
+            Example: production-instance-1
+            AWS expects camelCase JSON field name: "logStreamName"
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Telemetry.AwsCloudWatchLogPayload.LogEvents">
+            <summary>
+            Gets or sets the array of log events to send.
+            AWS expects camelCase JSON field name: "logEvents"
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Telemetry.AwsJsonSerializer">
+            <summary>
+            Provides lightweight JSON serialization for AWS CloudWatch Logs without external dependencies.
+            This serializer is designed to serialize arbitrary objects (anonymous types, AWS models, etc.)
+            to JSON format suitable for AWS APIs.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsJsonSerializer.Serialize(System.Object)">
+            <summary>
+            Serializes any object to a JSON string.
+            Supports anonymous types, dictionaries, lists, and basic types.
+            </summary>
+            <param name="obj">The object to serialize.</param>
+            <returns>A JSON string representation of the object, or "null" if obj is null.</returns>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsJsonSerializer.SerializeValue(System.Text.StringBuilder,System.Object)">
+            <summary>
+            Recursively serializes a value to JSON format.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsJsonSerializer.SerializeString(System.Text.StringBuilder,System.String)">
+            <summary>
+            Serializes a string value with proper JSON escaping.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsJsonSerializer.SerializeDictionary(System.Text.StringBuilder,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Serializes a Dictionary&lt;string, string&gt; to JSON object format.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsJsonSerializer.SerializeObjectDictionary(System.Text.StringBuilder,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Serializes a Dictionary&lt;string, object&gt; to JSON object format.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsJsonSerializer.SerializeAwsLogEventList(System.Text.StringBuilder,System.Collections.Generic.IList{Syncfusion.Telemetry.AwsCloudWatchLogEvent})">
+            <summary>
+            Serializes a list of AwsCloudWatchLogEvent to JSON array format.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Telemetry.AwsJsonSerializer.SerializeObject(System.Text.StringBuilder,System.Object)">
+            <summary>
+            Serializes an object (including anonymous types) to JSON using reflection.
+            Respects DataMember attributes for custom JSON field names.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.CustomerInsightPlaform.Azure">
+            <summary>
+            Microsoft Azure Application Insights
+            
+            Connection string format:
+              InstrumentationKey=00000000-0000-0000-0000-000000000000;IngestionEndpoint=https://...
+            
+            Base64 encoded version used with SetupTelemetry()
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Telemetry.CustomerInsightPlaform.AwsCloudWatch">
+            <summary>
+            Amazon AWS CloudWatch Logs
+            
+            Connection string format:
+              AccessKeyId=AKIA...;SecretAccessKey=...;Region=us-east-1;LogGroupName=/my-app
+            
+            </summary>
+        </member>
+    </members>
+</doc>

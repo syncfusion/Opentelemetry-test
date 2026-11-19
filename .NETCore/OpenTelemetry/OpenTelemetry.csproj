@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net11.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+	<ItemGroup>
+		<Reference Include="Syncfusion.Compression.Portable">
+		  <HintPath>..\Assemblies\Syncfusion.Compression.Portable.dll</HintPath>
+		</Reference>
+		<Reference Include="Syncfusion.Licensing">
+		  <HintPath>..\Assemblies\Syncfusion.Licensing.dll</HintPath>
+		</Reference>		
+		<Reference Include="Syncfusion.Pdf.Portable">
+		  <HintPath>..\Assemblies\Syncfusion.Pdf.Portable.dll</HintPath>
+		</Reference>		
+		<Reference Include="Syncfusion.Telemetry">
+		  <HintPath>..\Assemblies\Syncfusion.Telemetry.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+</Project>
