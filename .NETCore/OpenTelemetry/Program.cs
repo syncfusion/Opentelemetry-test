@@ -16,7 +16,7 @@ else
 {
     var message = result.Message;    
 }
-Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("YOUR_License_Key");
+Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("YOUR_LICENSE_KEY");
 //Creates a new PDF document.
 PdfDocument document = new PdfDocument();
 //Creates a new page .
