@@ -29,7 +29,7 @@ namespace OpenTelemetry
 			{
 				var message = result.Message;    
 			}
-			Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("YOUR_License_Key");
+			Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("YOUR_LICENSE_KEY");
 
         }
     }
